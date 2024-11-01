@@ -16,4 +16,4 @@ def db_connect():
 
 # This is another test comment
 
-# This is a comment to test the inverse: a student incorportating changes from main into their branch.
+# This is a comment to test the inverse: a student incorporating changes from main into their branch.
