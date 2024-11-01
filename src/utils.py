@@ -11,9 +11,3 @@ def db_connect():
     engine = create_engine(os.getenv('DATABASE_URL'))
     engine.connect()
     return engine
-
-# This is a comment to test branching and merging from a codespace
-
-# This is another test comment
-
-# This is a comment to test the inverse: a student incorporating changes from main into their branch.
