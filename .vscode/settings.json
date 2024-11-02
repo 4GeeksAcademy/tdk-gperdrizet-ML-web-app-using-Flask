@@ -5,5 +5,9 @@
     },
     "githubPullRequests.ignoredPullRequestBranches": [
         "main"
+    ],
+    "cSpell.words": [
+        "gini",
+        "Quantile"
     ]
 }
