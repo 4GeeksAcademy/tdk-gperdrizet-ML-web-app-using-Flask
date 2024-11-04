@@ -7,9 +7,13 @@
         "main"
     ],
     "cSpell.words": [
+        "edgecolor",
         "gini",
+        "horizontalalignment",
+        "hyperparameters",
         "importances",
         "Quantile",
-        "rfecv"
+        "rfecv",
+        "ytick"
     ]
 }
