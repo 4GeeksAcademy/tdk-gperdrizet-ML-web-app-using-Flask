@@ -26,11 +26,12 @@ def db_connect():
 def impute(data_df: pd.DataFrame, missing_data_features: list) -> pd.DataFrame:
     '''Takes pandas dataframe and feature list. Runs
     Scikit-learn's IterativeImputer on specified features.
-    Returns an updated dataframe.'''
+    Returns an updated dataframe and the fit imputer and
+    quantile transformers for later use.'''
 
     # Save the feature names for later - the imputer will return a numpy array
     # and we might like to get out Pandas dataframe back
-    feature_names=data_df.columns
+    feature_names=list(data_df.columns)
 
     # Make a copy of the training features dataframe, in case we decide that this
     # is a bad idea
@@ -43,14 +44,19 @@ def impute(data_df: pd.DataFrame, missing_data_features: list) -> pd.DataFrame:
     imputed_training_features[missing_data_features]=qt.transform(imputed_training_features[missing_data_features])
 
     # Run the imputation
-    imp=IterativeImputer(max_iter=100, verbose=True, tol=1e-6, sample_posterior=True)
+    imp=IterativeImputer(max_iter=100, verbose=True, tol=1e-6, sample_posterior=True, add_indicator=True)
     imp.fit(imputed_training_features)
     imputed_training_features=imp.transform(imputed_training_features)
 
     # Convert back to pandas
+    indicator_features=[]
+    for feature in missing_data_features:
+        indicator_features.append(f'{feature}_indicator')
+
+    feature_names.extend(indicator_features)
     imputed_training_features=pd.DataFrame(data=imputed_training_features, columns=feature_names)
 
-    return imputed_training_features
+    return imputed_training_features, imp, qt
 
 
 def plot_scatter_matrix(input_df: pd.DataFrame) -> plt:
@@ -60,7 +66,7 @@ def plot_scatter_matrix(input_df: pd.DataFrame) -> plt:
     features_df=input_df.copy()
 
     # Get the cross correlation matrix
-    correlations = features_df.corr(method = 'pearson')
+    correlations = features_df.corr(method = 'spearman')
     correlations = correlations.to_numpy().flatten()
 
     # Get the feature names from the dataframe
