@@ -6,6 +6,5 @@ The project consists of four main parts:
 
 1. **Model inference function**: This portion takes data from users and sends it to the model for prediction. It then sends back the prediction.
 2. **Flask**: Flask is a simple web application framework, it will act as the go-between to bridge the html world of the user's web-browser and our internal python functions.
-3. **Render**: render is the cloud hosting service we will use to actually run our application. This allows us to have a public URL where the application can be accessed.
-
-Edit test...
+3. **Gunicorn**: Guincorn is the webserver that will serve the page to users and send data to our application via Flask.
+4. **Render**: render is the cloud hosting service we will use to actually run our application. This allows us to have a public URL where the application can be accessed.
