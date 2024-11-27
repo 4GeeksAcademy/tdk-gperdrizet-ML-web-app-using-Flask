@@ -6,21 +6,9 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-from dotenv import load_dotenv
-from sqlalchemy import create_engine
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 from sklearn.preprocessing import QuantileTransformer
-
-# load the .env file variables
-load_dotenv()
-
-
-def db_connect():
-    import os
-    engine = create_engine(os.getenv('DATABASE_URL'))
-    engine.connect()
-    return engine
 
 
 def impute(data_df: pd.DataFrame, missing_data_features: list) -> pd.DataFrame:
