@@ -11,7 +11,6 @@ with open(model_file, 'rb') as input_file:
 # Define the flask application
 app=Flask(__name__)
 
-
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     if request.method == 'POST':

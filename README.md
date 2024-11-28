@@ -14,3 +14,20 @@ The project consists of four main parts:
 ## Render set-up
 
 Once you have your app running in a codespace with no errors, it is time to deploy to Render. Go to [render.com](https://render.com/) and click 'Get started for free'. The site will ask for an email address and password and then send you a conformation link. After clicking the link, you are asked to fill out some basic profile details and finally taken to the 'service type' page on the Render Dashboard page.
+
+1. Choose 'New web service' from the service type dashboard tab.
+2. On the Configure tab, select 'Public Git Repository' and past the link to your project repo.
+3. Click 'Connect'
+
+Add the following settings:
+
+1. Name: whatever you want
+2. Project: don't need to add to a project
+3. Language: Python 3
+4. Branch: main
+5. Region: Ohio (US east)
+6. Root directory: src
+7. pip install -r requirements.txt
+8. gunicorn app:app
+
+Set the instance type to free, and you can leave everything else alone. Click 'Deploy Web Service'! You should see the requirements.txt being installed in the log terminal and then gunicorn starting. If there were no problems, you can now access your web app at the URL provided at the top of the page, under the project name and GitHub repo link.
