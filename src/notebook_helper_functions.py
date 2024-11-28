@@ -27,7 +27,7 @@ def impute(data_df: pd.DataFrame, missing_data_features: list) -> pd.DataFrame:
     imputed_training_features[missing_data_features]=imputed_training_features[missing_data_features].replace({0:np.nan})
 
     # Quantile transform our target features - this is for the imputer, not the decision tree
-    qt=QuantileTransformer(n_quantiles=10, random_state=0)
+    qt=QuantileTransformer(n_quantiles=100, output_distribution='normal', random_state=0)
     qt.fit(imputed_training_features[missing_data_features])
     imputed_training_features[missing_data_features]=qt.transform(imputed_training_features[missing_data_features])
 
@@ -42,7 +42,14 @@ def impute(data_df: pd.DataFrame, missing_data_features: list) -> pd.DataFrame:
         indicator_features.append(f'{feature}_indicator')
 
     feature_names.extend(indicator_features)
+    print(f'New feature names: {feature_names}')
+
     imputed_training_features=pd.DataFrame(data=imputed_training_features, columns=feature_names)
+
+    # Now that zeros have been replaces - undo the quantile transformation.
+    # This way we are training the model on un-altered values. This way,
+    # during deployment, we don't have to worry about transforming the input data.
+    imputed_training_features[missing_data_features]=qt.inverse_transform(imputed_training_features[missing_data_features])
 
     return imputed_training_features, imp, qt
 
