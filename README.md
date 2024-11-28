@@ -27,7 +27,9 @@ Add the following settings:
 4. Branch: main
 5. Region: Ohio (US east)
 6. Root directory: src
-7. pip install -r requirements.txt
+7. pip install -r ../requirements.txt
 8. gunicorn app:app
 
-Set the instance type to free, and you can leave everything else alone. Click 'Deploy Web Service'! You should see the requirements.txt being installed in the log terminal and then gunicorn starting. If there were no problems, you can now access your web app at the URL provided at the top of the page, under the project name and GitHub repo link.
+Only real gotcha here is the root directory - setting it to src, means that Render will run all commands from there. This is what we want since our app lives in src. But since the requirements file is in the project home (i.e. one directory above src) we need to make sure we get the path right while pip installing.
+
+After that set the instance type to free, and you can leave everything else alone. Click 'Deploy Web Service'! You should see the requirements.txt being installed in the log terminal and then gunicorn starting. If there were no problems, you can now access your web app at the URL provided at the top of the page, under the project name and GitHub repo link.
