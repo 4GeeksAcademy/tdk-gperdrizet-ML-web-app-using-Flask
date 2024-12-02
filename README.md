@@ -8,8 +8,8 @@ The project consists of four components:
 
 1. **Model inference function**: This function is the heart of the app. You will write it in Python. It sends input data to the pre-trained model for inference and returns the prediction.
 2. **[Flask](https://flask.palletsprojects.com/en/stable/)**: Flask is a simple web application framework, it will act as the go-between to bridge the html world of the user's web-browser and our internal python functions.
-3. **[Gunicorn](https://gunicorn.org/**: Gunicorn is the webserver that will serve the page to users and send data to our application via Flask.
-4. **[Render](https://render.com/**: Render is the cloud hosting service we will use to actually run our application. This allows us to have a public URL where the application can be accessed by users.
+3. **[Gunicorn](https://gunicorn.org/)**: Gunicorn is the webserver that will serve the page to users and send data to our application via Flask.
+4. **[Render](https://render.com/)**: Render is the cloud hosting service we will use to actually run our application. This allows us to have a public URL where the application can be accessed by users.
 
 ## Render deployment
 
